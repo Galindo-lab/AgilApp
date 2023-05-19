@@ -4,6 +4,8 @@
  */
 package interfacepoo;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.mycompany.agileutils.Proyect;
 import java.awt.Color;
 import java.io.File;
 import java.util.logging.Level;
@@ -19,12 +21,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author ERICK
  */
-public class Menu extends javax.swing.JFrame {
+public class MainMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public MainMenu() {
         initComponents();
     }
 
@@ -42,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         newtask = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -61,8 +64,10 @@ public class Menu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("mySCRUM");
 
         jToolBar1.setRollover(true);
         jToolBar1.setFloatable(false);
@@ -73,19 +78,25 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        newtask.setText("New Task");
+        newtask.setText("New");
         newtask.setFocusable(false);
         newtask.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         newtask.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        newtask.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newtaskActionPerformed(evt);
+            }
+        });
         jToolBar1.add(newtask);
 
-        jButton2.setText("Delete Task");
+        jButton2.setText("Delete");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
+        jToolBar1.add(filler1);
 
-        jButton1.setText("Asign Task");
+        jButton1.setText("Asign");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -115,11 +126,11 @@ public class Menu extends javax.swing.JFrame {
             panelTaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTaskLayout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Tareas", panelTask);
+        jTabbedPane1.addTab("Tasks", panelTask);
 
         jToolBar2.setRollover(true);
         jToolBar2.setFloatable(false);
@@ -128,7 +139,7 @@ public class Menu extends javax.swing.JFrame {
         jToolBar2.setMinimumSize(new java.awt.Dimension(133, 28));
         jToolBar2.setPreferredSize(new java.awt.Dimension(133, 28));
 
-        newteam.setText("New Team");
+        newteam.setText("New");
         newteam.setFocusable(false);
         newteam.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         newteam.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -139,7 +150,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jToolBar2.add(newteam);
 
-        deleteteam.setText("Delete Team");
+        deleteteam.setText("Delete");
         deleteteam.setFocusable(false);
         deleteteam.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         deleteteam.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -169,11 +180,11 @@ public class Menu extends javax.swing.JFrame {
             panelTeamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTeamsLayout.createSequentialGroup()
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Equipos", panelTeams);
+        jTabbedPane1.addTab("Teams", panelTeams);
 
         jToolBar3.setRollover(true);
         jToolBar3.setFloatable(false);
@@ -182,7 +193,7 @@ public class Menu extends javax.swing.JFrame {
         jToolBar3.setMinimumSize(new java.awt.Dimension(133, 28));
         jToolBar3.setPreferredSize(new java.awt.Dimension(133, 28));
 
-        newmember.setText("New Member");
+        newmember.setText("New");
         newmember.setFocusable(false);
         newmember.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         newmember.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -193,7 +204,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jToolBar3.add(newmember);
 
-        deletemember.setText("Delete Member");
+        deletemember.setText("Delete");
         deletemember.setFocusable(false);
         deletemember.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         deletemember.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -223,11 +234,11 @@ public class Menu extends javax.swing.JFrame {
             panelMembersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMembersLayout.createSequentialGroup()
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Miembros", panelMembers);
+        jTabbedPane1.addTab("Members", panelMembers);
 
         jMenu1.setText("File");
 
@@ -249,6 +260,9 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setText("About");
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,40 +283,54 @@ public class Menu extends javax.swing.JFrame {
         // Crear el selector de archivos
         JFileChooser selectorArchivos = new JFileChooser();
         // Filtrar por archivos .mpp
-        FileNameExtensionFilter filtroMPP = new FileNameExtensionFilter("Archivos de MS Project (*.mpp)", "mpp");
+        FileNameExtensionFilter filtroMPP = new FileNameExtensionFilter(
+                "Archivos de MS Project (*.mpx)",
+                "mpx"
+        );
+
         selectorArchivos.setFileFilter(filtroMPP);
         // Mostrar el selector de archivos
-        int seleccion = selectorArchivos.showOpenDialog(this);
-        if (seleccion == JFileChooser.APPROVE_OPTION) {
+        if (selectorArchivos.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             // Verificar si la extensión del archivo es .mpp
             File archivoSeleccionado = selectorArchivos.getSelectedFile();
-            if (archivoSeleccionado.getName().toLowerCase().endsWith(".mpp")) {
+            if (archivoSeleccionado.getName().toLowerCase().endsWith(".mpx")) {
                 // Si se seleccionó un archivo con la extensión correcta, hacer acción X
                 System.out.println("Éxito al abrir el archivo");
             } else {
-            // Si no, mostrar mensaje de error al usuario
-            JOptionPane.showMessageDialog(this, "Seleccione un archivo .mpp", "Error de archivo", JOptionPane.ERROR_MESSAGE);
+                // Si no, mostrar mensaje de error al usuario
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Seleccione un archivo .mpx",
+                        "Error de archivo",
+                        JOptionPane.ERROR_MESSAGE
+                );
             }
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jToolBar1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jToolBar1ComponentAdded
-        
+
     }//GEN-LAST:event_jToolBar1ComponentAdded
 
-    private void newteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newteamActionPerformed
-        Team d1 = new Team(this,true);
-        d1.setVisible(true);
-    }//GEN-LAST:event_newteamActionPerformed
-
     private void newmemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newmemberActionPerformed
-        Member d2 = new Member(this,true);
+        MemberForm d2 = new MemberForm(this, true);
         d2.setVisible(true);
     }//GEN-LAST:event_newmemberActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // SAVE
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void newteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newteamActionPerformed
+        TeamForm d1 = new TeamForm(this, true);
+        d1.setVisible(true);
+        System.out.println(d1.getTeamName());
+    }//GEN-LAST:event_newteamActionPerformed
+
+    private void newtaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newtaskActionPerformed
+        Proyect a = new Proyect("", "");
+        System.out.println(a);
+    }//GEN-LAST:event_newtaskActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,37 +341,41 @@ public class Menu extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                System.out.println(info.getName());
+//                if ("Windows Classic".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainMenu().setVisible(true);
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deletemember;
     private javax.swing.JButton deleteteam;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
