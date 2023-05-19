@@ -6,16 +6,16 @@ package interfacepoo;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.mycompany.agileutils.Proyect;
-import java.awt.Color;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 /**
  *
@@ -28,6 +28,9 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+    
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/icons8-add-48.png")));
+
     }
 
     /**
@@ -39,25 +42,29 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelTask = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         newtask = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         jButton1 = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         panelTeams = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         newteam = new javax.swing.JButton();
         deleteteam = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         panelMembers = new javax.swing.JPanel();
         jToolBar3 = new javax.swing.JToolBar();
         newmember = new javax.swing.JButton();
         deletemember = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -68,10 +75,12 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("mySCRUM");
+        setIconImage(getIconImage());
 
         jToolBar1.setRollover(true);
         jToolBar1.setFloatable(false);
         jToolBar1.setBorderPainted(false);
+        jToolBar1.setPreferredSize(new java.awt.Dimension(221, 74));
         jToolBar1.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jToolBar1ComponentAdded(evt);
@@ -79,8 +88,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         newtask.setText("New");
+        newtask.setToolTipText("");
         newtask.setFocusable(false);
         newtask.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newtask.setPreferredSize(new java.awt.Dimension(70, 70));
+        newtask.setSelected(true);
         newtask.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         newtask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,15 +104,23 @@ public class MainMenu extends javax.swing.JFrame {
         jButton2.setText("Delete");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setPreferredSize(new java.awt.Dimension(70, 24));
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
-        jToolBar1.add(filler1);
+        jToolBar1.add(jSeparator2);
 
         jButton1.setText("Asign");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setPreferredSize(new java.awt.Dimension(70, 24));
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton1);
+        jToolBar1.add(filler1);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,15 +139,16 @@ public class MainMenu extends javax.swing.JFrame {
         panelTask.setLayout(panelTaskLayout);
         panelTaskLayout.setHorizontalGroup(
             panelTaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelTaskLayout.setVerticalGroup(
             panelTaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTaskLayout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tasks", panelTask);
@@ -142,6 +163,8 @@ public class MainMenu extends javax.swing.JFrame {
         newteam.setText("New");
         newteam.setFocusable(false);
         newteam.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newteam.setMinimumSize(new java.awt.Dimension(70, 70));
+        newteam.setPreferredSize(new java.awt.Dimension(70, 24));
         newteam.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         newteam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,8 +176,15 @@ public class MainMenu extends javax.swing.JFrame {
         deleteteam.setText("Delete");
         deleteteam.setFocusable(false);
         deleteteam.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteteam.setPreferredSize(new java.awt.Dimension(70, 24));
         deleteteam.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        deleteteam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteteamActionPerformed(evt);
+            }
+        });
         jToolBar2.add(deleteteam);
+        jToolBar2.add(filler2);
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,9 +209,10 @@ public class MainMenu extends javax.swing.JFrame {
         panelTeamsLayout.setVerticalGroup(
             panelTeamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTeamsLayout.createSequentialGroup()
-                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Teams", panelTeams);
@@ -196,6 +227,7 @@ public class MainMenu extends javax.swing.JFrame {
         newmember.setText("New");
         newmember.setFocusable(false);
         newmember.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newmember.setPreferredSize(new java.awt.Dimension(70, 24));
         newmember.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         newmember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,8 +239,15 @@ public class MainMenu extends javax.swing.JFrame {
         deletemember.setText("Delete");
         deletemember.setFocusable(false);
         deletemember.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deletemember.setPreferredSize(new java.awt.Dimension(70, 24));
         deletemember.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        deletemember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletememberActionPerformed(evt);
+            }
+        });
         jToolBar3.add(deletemember);
+        jToolBar3.add(filler3);
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -218,9 +257,24 @@ public class MainMenu extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Name", "Email", "ID"
+                "ID", "Name", "Email"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(jTable4);
 
         javax.swing.GroupLayout panelMembersLayout = new javax.swing.GroupLayout(panelMembers);
@@ -233,9 +287,10 @@ public class MainMenu extends javax.swing.JFrame {
         panelMembersLayout.setVerticalGroup(
             panelMembersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMembersLayout.createSequentialGroup()
-                .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Members", panelMembers);
@@ -282,6 +337,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // Crear el selector de archivos
         JFileChooser selectorArchivos = new JFileChooser();
+        
         // Filtrar por archivos .mpp
         FileNameExtensionFilter filtroMPP = new FileNameExtensionFilter(
                 "Archivos de MS Project (*.mpx)",
@@ -332,6 +388,18 @@ public class MainMenu extends javax.swing.JFrame {
         System.out.println(a);
     }//GEN-LAST:event_newtaskActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void deleteteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteteamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteteamActionPerformed
+
+    private void deletememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletememberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deletememberActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,6 +440,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton deletemember;
     private javax.swing.JButton deleteteam;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
@@ -382,6 +452,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
