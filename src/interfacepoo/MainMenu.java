@@ -16,19 +16,21 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 /**
  *
  * @author ERICK
+ * @author Galindo
  */
 public class MainMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
+    
+    Proyect proyect; 
+    
     public MainMenu() {
         initComponents();
-    
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/icons8-add-48.png")));
 
     }
@@ -46,7 +48,7 @@ public class MainMenu extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelTask = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
-        newtask = new javax.swing.JButton();
+        addTask = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jButton1 = new javax.swing.JButton();
@@ -87,25 +89,28 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        newtask.setText("New");
-        newtask.setToolTipText("");
-        newtask.setFocusable(false);
-        newtask.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        newtask.setPreferredSize(new java.awt.Dimension(70, 70));
-        newtask.setSelected(true);
-        newtask.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        newtask.addActionListener(new java.awt.event.ActionListener() {
+        addTask.setText("Add");
+        addTask.setFocusable(false);
+        addTask.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addTask.setPreferredSize(new java.awt.Dimension(70, 24));
+        addTask.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        addTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newtaskActionPerformed(evt);
+                addTaskActionPerformed(evt);
             }
         });
-        jToolBar1.add(newtask);
+        jToolBar1.add(addTask);
 
         jButton2.setText("Delete");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setPreferredSize(new java.awt.Dimension(70, 24));
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton2);
         jToolBar1.add(jSeparator2);
 
@@ -297,7 +302,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        jMenuItem1.setText("Open");
+        jMenuItem1.setText("Load ");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -305,6 +310,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("Save");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -337,7 +343,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // Crear el selector de archivos
         JFileChooser selectorArchivos = new JFileChooser();
-        
+
         // Filtrar por archivos .mpp
         FileNameExtensionFilter filtroMPP = new FileNameExtensionFilter(
                 "Archivos de MS Project (*.mpx)",
@@ -346,12 +352,17 @@ public class MainMenu extends javax.swing.JFrame {
 
         selectorArchivos.setFileFilter(filtroMPP);
         // Mostrar el selector de archivos
+        
         if (selectorArchivos.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             // Verificar si la extensión del archivo es .mpp
             File archivoSeleccionado = selectorArchivos.getSelectedFile();
             if (archivoSeleccionado.getName().toLowerCase().endsWith(".mpx")) {
                 // Si se seleccionó un archivo con la extensión correcta, hacer acción X
-                System.out.println("Éxito al abrir el archivo");
+                //System.out.println("Éxito al abrir el archivo");
+                proyect = new Proyect(archivoSeleccionado.getName(), "aaa");
+                proyect.load(archivoSeleccionado.toPath().toString());
+               
+                this.setTitle(proyect.getName());
             } else {
                 // Si no, mostrar mensaje de error al usuario
                 JOptionPane.showMessageDialog(
@@ -374,7 +385,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_newmemberActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // SAVE
+        System.out.println("aaaaaaa");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void newteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newteamActionPerformed
@@ -382,11 +393,6 @@ public class MainMenu extends javax.swing.JFrame {
         d1.setVisible(true);
         System.out.println(d1.getTeamName());
     }//GEN-LAST:event_newteamActionPerformed
-
-    private void newtaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newtaskActionPerformed
-        Proyect a = new Proyect("", "");
-        System.out.println(a);
-    }//GEN-LAST:event_newtaskActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -400,34 +406,26 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deletememberActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void addTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTaskActionPerformed
+        
+    }//GEN-LAST:event_addTaskActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                System.out.println(info.getName());
-//                if ("Windows Classic".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
 
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
 
         //</editor-fold>
 
@@ -437,6 +435,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addTask;
     private javax.swing.JButton deletemember;
     private javax.swing.JButton deleteteam;
     private javax.swing.Box.Filler filler1;
@@ -462,7 +461,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
     private javax.swing.JButton newmember;
-    private javax.swing.JButton newtask;
     private javax.swing.JButton newteam;
     private javax.swing.JPanel panelMembers;
     private javax.swing.JPanel panelTask;
