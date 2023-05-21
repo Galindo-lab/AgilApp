@@ -411,7 +411,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void addTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTaskActionPerformed
-        
+        TaskDialog td = new TaskDialog(this,true);
+        td.setVisible(true);
+        System.out.println(td.getTask());
     }//GEN-LAST:event_addTaskActionPerformed
 
     /**
