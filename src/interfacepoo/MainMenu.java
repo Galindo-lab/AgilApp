@@ -6,6 +6,7 @@ package interfacepoo;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.mycompany.agileutils.Proyect;
+import com.mycompany.agileutils.Team;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.logging.Level;
@@ -15,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -26,9 +29,8 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    
-    Proyect proyect; 
-    
+    Proyect proyect;
+
     public MainMenu() {
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/icons8-add-48.png")));
@@ -45,6 +47,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelTask = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
@@ -54,21 +57,21 @@ public class MainMenu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        taskTable = new javax.swing.JTable();
         panelTeams = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         newteam = new javax.swing.JButton();
         deleteteam = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        teamsTable = new javax.swing.JTable();
         panelMembers = new javax.swing.JPanel();
         jToolBar3 = new javax.swing.JToolBar();
         newmember = new javax.swing.JButton();
         deletemember = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        membersTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -127,24 +130,29 @@ public class MainMenu extends javax.swing.JFrame {
         jToolBar1.add(jButton1);
         jToolBar1.add(filler1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        taskTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Task", "Duration", "Start Date", "End Date"
+                "ID", "Task", "Duration", "Start Date", "End Date"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(taskTable);
 
         javax.swing.GroupLayout panelTaskLayout = new javax.swing.GroupLayout(panelTask);
         panelTask.setLayout(panelTaskLayout);
         panelTaskLayout.setHorizontalGroup(
             panelTaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelTaskLayout.setVerticalGroup(
@@ -153,7 +161,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tasks", panelTask);
@@ -191,25 +199,22 @@ public class MainMenu extends javax.swing.JFrame {
         jToolBar2.add(deleteteam);
         jToolBar2.add(filler2);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        teamsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Name Team", "ScrumMaster"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(teamsTable);
 
         javax.swing.GroupLayout panelTeamsLayout = new javax.swing.GroupLayout(panelTeams);
         panelTeams.setLayout(panelTeamsLayout);
         panelTeamsLayout.setHorizontalGroup(
             panelTeamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
         );
         panelTeamsLayout.setVerticalGroup(
             panelTeamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +222,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Teams", panelTeams);
@@ -254,12 +259,9 @@ public class MainMenu extends javax.swing.JFrame {
         jToolBar3.add(deletemember);
         jToolBar3.add(filler3);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        membersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Email"
@@ -280,14 +282,14 @@ public class MainMenu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(membersTable);
 
         javax.swing.GroupLayout panelMembersLayout = new javax.swing.GroupLayout(panelMembers);
         panelMembers.setLayout(panelMembersLayout);
         panelMembersLayout.setHorizontalGroup(
             panelMembersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar3, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar3, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
         );
         panelMembersLayout.setVerticalGroup(
             panelMembersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,7 +297,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Members", panelMembers);
@@ -341,38 +343,68 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
         // Crear el selector de archivos
         JFileChooser selectorArchivos = new JFileChooser();
+        selectorArchivos.setFileFilter(new FileNameExtensionFilter("Archivos de MS Project (*.mpx)", "mpx"));
 
-        // Filtrar por archivos .mpp
-        FileNameExtensionFilter filtroMPP = new FileNameExtensionFilter(
-                "Archivos de MS Project (*.mpx)",
-                "mpx"
-        );
+        if (selectorArchivos.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
+            // Mostrar el selector de archivos
+            return;
+        }
 
-        selectorArchivos.setFileFilter(filtroMPP);
-        // Mostrar el selector de archivos
-        
-        if (selectorArchivos.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            // Verificar si la extensión del archivo es .mpp
-            File archivoSeleccionado = selectorArchivos.getSelectedFile();
-            if (archivoSeleccionado.getName().toLowerCase().endsWith(".mpx")) {
-                // Si se seleccionó un archivo con la extensión correcta, hacer acción X
-                //System.out.println("Éxito al abrir el archivo");
-                proyect = new Proyect(archivoSeleccionado.getName(), "aaa");
-                proyect.load(archivoSeleccionado.toPath().toString());
-               
-                this.setTitle(proyect.getName());
-            } else {
-                // Si no, mostrar mensaje de error al usuario
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Seleccione un archivo .mpx",
-                        "Error de archivo",
-                        JOptionPane.ERROR_MESSAGE
-                );
+        // Verificar si la extensión del archivo es .mpp
+        File archivoSeleccionado = selectorArchivos.getSelectedFile();
+
+        if (!archivoSeleccionado.getName().toLowerCase().endsWith(".mpx")) {
+            // Si no, mostrar mensaje de error al usuario
+            JOptionPane.showMessageDialog(this, "Seleccione un archivo .mpx", "Error de archivo", JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+
+        // cargar el modelo
+        proyect = new Proyect(archivoSeleccionado.getName(), "undefined");
+        proyect.load(archivoSeleccionado.toPath().toString());
+        this.setTitle(proyect.getName());
+
+        // poblar las tablas
+        var taskModel = (DefaultTableModel) this.taskTable.getModel();
+
+        for (int i = 0; i < proyect.taskboard.size(); i++) {
+            var foo = proyect.taskboard.get(i);
+            taskModel.addRow(new Object[]{
+                foo.getId(),
+                foo.getName(),
+                foo.getDurationDays(),
+                foo.getStart(),
+                foo.getEnd()
+            });
+        }
+
+        var teamsModel = (DefaultTableModel) this.teamsTable.getModel();
+        for (int i = 0; i < proyect.teams.size(); i++) {
+            var foo = proyect.teams.get(i);
+            teamsModel.addRow(new Object[]{
+                foo.getName(),
+                "SCRUM MASTER"
+            });
+        }
+
+        var membersModel = (DefaultTableModel) this.membersTable.getModel();
+        for (int i = 0; i < proyect.teams.size(); i++) {
+            Team team = proyect.teams.get(i);
+
+            for (int j = 0; j < team.size(); j++) {
+                var foo = team.getMemberByIndex(i);
+                membersModel.addRow(new Object[]{
+                    foo.getId(),
+                    foo.getName(),
+                    foo.getEmail()
+                });
             }
         }
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jToolBar1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jToolBar1ComponentAdded
@@ -411,9 +443,15 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void addTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTaskActionPerformed
-        TaskDialog td = new TaskDialog(this,true);
+        TaskDialog td = new TaskDialog(this, true);
         td.setVisible(true);
+
+        if (!td.isValueCaptured()) {
+            return;
+        }
+
         System.out.println(td.getTask());
+
     }//GEN-LAST:event_addTaskActionPerformed
 
     /**
@@ -445,6 +483,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -456,16 +495,16 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
+    private javax.swing.JTable membersTable;
     private javax.swing.JButton newmember;
     private javax.swing.JButton newteam;
     private javax.swing.JPanel panelMembers;
     private javax.swing.JPanel panelTask;
     private javax.swing.JPanel panelTeams;
+    private javax.swing.JTable taskTable;
+    private javax.swing.JTable teamsTable;
     // End of variables declaration//GEN-END:variables
 }
