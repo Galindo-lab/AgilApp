@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
  */
 public class TeamForm extends javax.swing.JDialog {
 
-    private Team team;
     
     /**
      * Creates new form Team
@@ -95,7 +94,21 @@ public class TeamForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    @Override
+    public void setName(String name) {
+        this.name.setText(name);
+    }
+    
+    public String getTaskName() {
+        return name.getText();
+    }
+    public void setScrummaster(String scrum) {
+        this.scrummaster.setText(scrum);
+    }
+    
+    public String getScrummaster() {
+        return scrummaster.getText();
+    }
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         
         JOptionPane optionPane = new JOptionPane("Incomplete data", JOptionPane.ERROR_MESSAGE);

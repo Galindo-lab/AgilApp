@@ -75,6 +75,15 @@ public class TaskBoard {
             this.add(Task.importTask(task));
         }
     }
+    public void updateTask(Task updatedTask) {
+        for (int i = 0; i < activities.size(); i++) {
+            Task task = activities.get(i);
+            if (task.getId() == updatedTask.getId()) {
+                activities.set(i, updatedTask);
+                break;
+            }
+        }
+    }
 
     @Override
     public String toString() {

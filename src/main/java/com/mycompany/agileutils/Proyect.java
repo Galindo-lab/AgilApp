@@ -92,6 +92,14 @@ public class Proyect {
             System.out.println("El equipo no existe");
         }
     }
+    public void updateTeamMember(String teamName, String memberID, String updatedName, String updatedEmail) {
+        Team team = getTeam(teamName);
+        if (team != null) {
+            team.updateMember(memberID, updatedName, updatedEmail);
+        } else {
+            System.out.println("El equipo no existe.");
+        }
+    }
 
     /**
      * Obtiene un equipo por nombre, retorna null si no existe

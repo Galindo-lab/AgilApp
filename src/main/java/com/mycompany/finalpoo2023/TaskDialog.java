@@ -10,14 +10,15 @@ import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Eduar
  */
 public class TaskDialog extends javax.swing.JDialog {
-
     private boolean valueCaptured = false;
+    
 
     /**
      * Creates new form TaskDialog
@@ -44,7 +45,7 @@ public class TaskDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        taskDetails = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -72,12 +73,12 @@ public class TaskDialog extends javax.swing.JDialog {
 
         jLabel3.setText("End date");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        taskDetails.setColumns(20);
+        taskDetails.setRows(5);
+        jScrollPane1.setViewportView(taskDetails);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setLabelFor(jTextArea1);
+        jLabel4.setLabelFor(taskDetails);
         jLabel4.setText("Task details");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -173,12 +174,40 @@ public class TaskDialog extends javax.swing.JDialog {
             dialog.setVisible(true);
             return;
         }
-
-        this.valueCaptured = true;
+        
+            this.valueCaptured = true;
 
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+   public void setTaskName(String task) {
+        taskName.setText(task);
+    }
+    
+    public String getTaskName() {
+        return taskName.getText();
+    }
+    public void setTaskID(int ID) {
+        taskID.setValue(ID);
+    }
+    
+    public int getTaskID() {
+        return (int) taskID.getValue();
+    }
+    public void setStartDate(LocalDate fecha) {
+        startDate.setDate(fecha);
+    }
+    
+    public LocalDate getStartDate() {
+        return startDate.getDate();
+    }
+    
+    public void setEndDate(LocalDate fecha) {
+        endDate.setDate(fecha);
+    }
+    
+    public LocalDate getEndDate() {
+        return endDate.getDate();
+    }
     private void taskNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskNameActionPerformed
 
     }//GEN-LAST:event_taskNameActionPerformed
@@ -227,6 +256,7 @@ public class TaskDialog extends javax.swing.JDialog {
             dialog.setVisible(true);
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.github.lgooddatepicker.components.CalendarPanel calendarPanel1;
@@ -238,8 +268,8 @@ public class TaskDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private com.github.lgooddatepicker.components.DatePicker startDate;
+    private javax.swing.JTextArea taskDetails;
     private javax.swing.JSpinner taskID;
     private javax.swing.JTextField taskName;
     // End of variables declaration//GEN-END:variables
@@ -262,7 +292,7 @@ public class TaskDialog extends javax.swing.JDialog {
         var startDate = asDate(this.startDate.getDate());
         var endDate = asDate(this.endDate.getDate());
         
-        var task = new Task(this.taskName.getText(), this.jTextArea1.getText(), startDate,endDate);
+        var task = new Task(this.taskName.getText(), this.taskDetails.getText(), startDate,endDate);
         
         var value = this.taskID.getValue().toString();
         if (!value.equals("0")) {

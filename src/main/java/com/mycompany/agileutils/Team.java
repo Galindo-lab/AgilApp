@@ -89,7 +89,16 @@ public class Team {
         
         this.members.remove(index);
     }
-
+    public void updateMember(String memberId, String name, String email) {
+        int updatedID = Integer.parseInt(memberId);
+        for (TeamMember member : members) {
+            if (member.getId() == updatedID) {
+                member.setName(name);
+                member.setEmail(email);
+                break;
+            }
+        }
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

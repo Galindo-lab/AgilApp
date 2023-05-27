@@ -6,14 +6,21 @@ package com.mycompany.finalpoo2023;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.mycompany.agileutils.Proyect;
+import com.mycompany.agileutils.Task;
 import com.mycompany.agileutils.Team;
+import com.mycompany.agileutils.TeamMember;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.time.Instant;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -31,6 +38,7 @@ public class MainMenu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     Proyect proyect;
+    
 
     public MainMenu() {
         initComponents();
@@ -61,6 +69,7 @@ public class MainMenu extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         addTask = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        taskEdit = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jButton1 = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -70,6 +79,7 @@ public class MainMenu extends javax.swing.JFrame {
         jToolBar2 = new javax.swing.JToolBar();
         newteam = new javax.swing.JButton();
         deleteteam = new javax.swing.JButton();
+        teamEdit = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane3 = new javax.swing.JScrollPane();
         teamsTable = new javax.swing.JTable();
@@ -77,6 +87,7 @@ public class MainMenu extends javax.swing.JFrame {
         jToolBar3 = new javax.swing.JToolBar();
         newmember = new javax.swing.JButton();
         deletemember = new javax.swing.JButton();
+        membersEdit = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane4 = new javax.swing.JScrollPane();
         membersTable = new javax.swing.JTable();
@@ -123,6 +134,17 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton2);
+
+        taskEdit.setText("Edit");
+        taskEdit.setFocusable(false);
+        taskEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        taskEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        taskEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taskEditActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(taskEdit);
         jToolBar1.add(jSeparator2);
 
         jButton1.setText("Asign");
@@ -207,6 +229,17 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(deleteteam);
+
+        teamEdit.setText("Edit");
+        teamEdit.setFocusable(false);
+        teamEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        teamEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        teamEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teamEditActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(teamEdit);
         jToolBar2.add(filler2);
 
         teamsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -270,6 +303,17 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jToolBar3.add(deletemember);
+
+        membersEdit.setText("Edit");
+        membersEdit.setFocusable(false);
+        membersEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        membersEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        membersEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                membersEditActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(membersEdit);
         jToolBar3.add(filler3);
 
         membersTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -509,6 +553,110 @@ public class MainMenu extends javax.swing.JFrame {
         this.reloadTaskTable();
     }//GEN-LAST:event_addTaskActionPerformed
 
+    private void taskEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskEditActionPerformed
+        int selectedRow = taskTable.getSelectedRow();
+
+        if (selectedRow != -1) {
+            TaskDialog td = new TaskDialog(this, true);
+            td.setLocationRelativeTo(this);
+            
+            String taskName = taskTable.getValueAt(selectedRow, 1).toString();
+            td.setTaskName(taskName);
+            int taskID = (int) taskTable.getValueAt(selectedRow, 0);
+            td.setTaskID(taskID);
+
+            Date startDate = (Date) taskTable.getValueAt(selectedRow, 3);
+            Instant startInstant = startDate.toInstant();
+            LocalDate startDateLocal = startInstant.atZone(ZoneId.systemDefault()).toLocalDate();
+            td.setStartDate(startDateLocal);
+
+            Date endDate = (Date) taskTable.getValueAt(selectedRow, 4);
+            Instant endInstant = endDate.toInstant();
+            LocalDate endDateLocal = endInstant.atZone(ZoneId.systemDefault()).toLocalDate();
+            td.setEndDate(endDateLocal);
+
+            td.setVisible(true);
+
+            if (!td.isValueCaptured()) {
+                return;
+            }
+
+            // Actualizar los valores de la tabla con los valores editados
+            Task editedTask = td.getTask();
+            proyect.taskboard.updateTask(editedTask);
+            
+            this.reloadTaskTable();
+        }
+    }//GEN-LAST:event_taskEditActionPerformed
+
+    private void teamEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamEditActionPerformed
+        if (this.teamsTable.getSelectedRow() != -1) {
+            TeamForm d1 = new TeamForm(this, true);
+            d1.setLocationRelativeTo(this);
+            
+            d1.setName(teamsTable.getValueAt(teamsTable.getSelectedRow(), 0).toString());
+            d1.setScrummaster(teamsTable.getValueAt(teamsTable.getSelectedRow(), 1).toString());
+            
+            d1.setVisible(true);
+            
+            String updatedName = d1.getTeamName();
+            String updatedScrumMaster = d1.getScrumMaster();
+            int teamIndex = this.teamsTable.getSelectedRow();
+            
+            Team team = proyect.teams.get(teamIndex);
+            team.setName(updatedName);
+            //team.setScrumMaster(updatedScrumMaster);
+            
+            this.reloadTeamsTables();
+            this.reloadMembersTables();
+            
+        }
+    }//GEN-LAST:event_teamEditActionPerformed
+
+    private void membersEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_membersEditActionPerformed
+        if (membersTable.getSelectedRow() != -1) {
+            MemberForm memberForm = new MemberForm(this, true);
+            memberForm.setLocationRelativeTo(this);
+
+            // Obtener los valores de la fila seleccionada en la tabla
+            int selectedRow = membersTable.getSelectedRow();
+            String id = membersTable.getValueAt(selectedRow, 0).toString();
+            String name = membersTable.getValueAt(selectedRow, 1).toString();
+            String email = membersTable.getValueAt(selectedRow, 2).toString();
+            String team = membersTable.getValueAt(selectedRow, 3).toString();
+            
+            for (Team teami : proyect.teams) {
+            memberForm.addTeam(teami.getName());
+            }
+            // Pasar los valores al formulario de edición
+            memberForm.setID(id);
+            memberForm.setName(name);
+            memberForm.setEmail(email);
+            
+
+            memberForm.setVisible(true);
+            if (memberForm.isValueCaptured()) {
+                String updatedName = memberForm.getName();
+                String updatedID = memberForm.getID();
+                String updatedEmail = memberForm.getEmail();
+                String updatedTeam = memberForm.getTeams();
+
+                // Obtener el equipo correspondiente en tu sistema
+                Team teamObject = proyect.getTeam(updatedTeam);
+                if (teamObject != null) {
+                    // Actualizar el miembro correspondiente en el equipo
+                    teamObject.updateMember(updatedID, updatedName, updatedEmail);
+
+                    // Vuelve a cargar los miembros en la tabla
+                    this.reloadMembersTables();
+                } else {
+                    System.out.println("El equipo no existe");
+                }
+            }
+        }
+
+    }//GEN-LAST:event_membersEditActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -559,13 +707,16 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
-    private javax.swing.JTable membersTable;
+    private javax.swing.JButton membersEdit;
+    public javax.swing.JTable membersTable;
     private javax.swing.JButton newmember;
     private javax.swing.JButton newteam;
     private javax.swing.JPanel panelMembers;
     private javax.swing.JPanel panelTask;
     private javax.swing.JPanel panelTeams;
+    private javax.swing.JButton taskEdit;
     private javax.swing.JTable taskTable;
+    private javax.swing.JButton teamEdit;
     private javax.swing.JTable teamsTable;
     // End of variables declaration//GEN-END:variables
 
@@ -581,7 +732,7 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }
 
-    private void reloadTaskTable() {
+    public void reloadTaskTable() {
         var taskModel = (DefaultTableModel) this.taskTable.getModel();
         taskModel.setRowCount(0);
         for (int i = 0; i < proyect.taskboard.size(); i++) {
@@ -596,7 +747,7 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }
 
-    private void reloadMembersTables() {
+    public void reloadMembersTables() {
 
         var membersModel = (DefaultTableModel) this.membersTable.getModel();
         membersModel.setRowCount(0);
@@ -615,7 +766,6 @@ public class MainMenu extends javax.swing.JFrame {
                 });
             }
         }
-
     }
 
 }

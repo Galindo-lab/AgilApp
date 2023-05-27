@@ -18,12 +18,14 @@ public class MemberForm extends javax.swing.JDialog {
     /**
      * Creates new form Member
      */
-    TeamMember member;
+
+    
     private boolean valueCaptured = false;
 
     public MemberForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
@@ -133,7 +135,34 @@ public class MemberForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void setName(String name) {
+        this.name.setText(name);
+    }
+    
+    public String getName() {
+        return name.getText();
+    }
+    public void setTeams(String team) {
+        teams.setSelectedItem(team);
+    }
+    
+    public String getTeams() {
+        return (String) teams.getSelectedItem();
+    }
+    public void setEmail(String email) {
+        this.email.setText(email);
+    }
+    
+    public String getEmail() {
+        return email.getText();
+    }
+    public void setID(String ID) {
+        this.id.setText(ID);
+    }
+    
+    public String getID() {
+        return id.getText();
+    }
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
@@ -157,11 +186,12 @@ public class MemberForm extends javax.swing.JDialog {
             dialog.setVisible(true);
             return;
         }
-
-        this.valueCaptured = true;
+            this.valueCaptured = true;
+        
         dispose();
     }//GEN-LAST:event_guardarActionPerformed
 
+    
     private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idActionPerformed
@@ -262,5 +292,4 @@ public class MemberForm extends javax.swing.JDialog {
     public boolean isValueCaptured() {
         return valueCaptured;
     }
-
 }

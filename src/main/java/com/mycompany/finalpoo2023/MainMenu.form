@@ -156,6 +156,17 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JButton" name="taskEdit">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Edit"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                    <Property name="verticalTextPosition" type="int" value="3"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="taskEditActionPerformed"/>
+                  </Events>
+                </Component>
                 <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton1">
@@ -320,6 +331,17 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteteamActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JButton" name="teamEdit">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Edit"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                    <Property name="verticalTextPosition" type="int" value="3"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teamEditActionPerformed"/>
+                  </Events>
+                </Component>
                 <Component class="javax.swing.Box$Filler" name="filler2">
                   <Properties>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -448,6 +470,17 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deletememberActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JButton" name="membersEdit">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Edit"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                    <Property name="verticalTextPosition" type="int" value="3"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="membersEditActionPerformed"/>
+                  </Events>
+                </Component>
                 <Component class="javax.swing.Box$Filler" name="filler3">
                   <Properties>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -506,6 +539,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
