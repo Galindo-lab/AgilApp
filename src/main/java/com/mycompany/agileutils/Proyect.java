@@ -100,6 +100,12 @@ public class Proyect {
             System.out.println("El equipo no existe.");
         }
     }
+    public void updateStory(int index, String updatedName, String updatedDescription, String updatedCriteria) {
+        UserHistory history = stories.get(index);
+        history.setTitle(updatedName);
+        history.setDescription(updatedDescription);
+        history.setAceptationCriteria(updatedCriteria);
+    }
 
     /**
      * Obtiene un equipo por nombre, retorna null si no existe

@@ -9,6 +9,7 @@ import com.mycompany.agileutils.Proyect;
 import com.mycompany.agileutils.Task;
 import com.mycompany.agileutils.Team;
 import com.mycompany.agileutils.TeamMember;
+import com.mycompany.agileutils.UserHistory;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -91,6 +92,14 @@ public class MainMenu extends javax.swing.JFrame {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane4 = new javax.swing.JScrollPane();
         membersTable = new javax.swing.JTable();
+        PanelUserHistory = new javax.swing.JPanel();
+        jToolBar4 = new javax.swing.JToolBar();
+        newStory = new javax.swing.JButton();
+        deleteStory = new javax.swing.JButton();
+        storyEdit = new javax.swing.JButton();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jScrollPane5 = new javax.swing.JScrollPane();
+        storyTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -341,6 +350,9 @@ public class MainMenu extends javax.swing.JFrame {
         });
         membersTable.setFocusable(false);
         jScrollPane4.setViewportView(membersTable);
+        if (membersTable.getColumnModel().getColumnCount() > 0) {
+            membersTable.getColumnModel().getColumn(3).setHeaderValue("Team");
+        }
 
         javax.swing.GroupLayout panelMembersLayout = new javax.swing.GroupLayout(panelMembers);
         panelMembers.setLayout(panelMembersLayout);
@@ -359,6 +371,92 @@ public class MainMenu extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Members", panelMembers);
+
+        jToolBar4.setRollover(true);
+        jToolBar4.setBorderPainted(false);
+        jToolBar4.setMaximumSize(new java.awt.Dimension(133, 28));
+        jToolBar4.setMinimumSize(new java.awt.Dimension(133, 28));
+        jToolBar4.setPreferredSize(new java.awt.Dimension(133, 28));
+
+        newStory.setText("New");
+        newStory.setFocusable(false);
+        newStory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newStory.setPreferredSize(new java.awt.Dimension(70, 24));
+        newStory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        newStory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newStoryActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(newStory);
+
+        deleteStory.setText("Delete");
+        deleteStory.setFocusable(false);
+        deleteStory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteStory.setPreferredSize(new java.awt.Dimension(70, 24));
+        deleteStory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        deleteStory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteStoryActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(deleteStory);
+
+        storyEdit.setText("Edit");
+        storyEdit.setFocusable(false);
+        storyEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        storyEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        storyEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storyEditActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(storyEdit);
+        jToolBar4.add(filler4);
+
+        storyTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Description", "Aceptation Criteria"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        storyTable.setFocusable(false);
+        jScrollPane5.setViewportView(storyTable);
+
+        javax.swing.GroupLayout PanelUserHistoryLayout = new javax.swing.GroupLayout(PanelUserHistory);
+        PanelUserHistory.setLayout(PanelUserHistoryLayout);
+        PanelUserHistoryLayout.setHorizontalGroup(
+            PanelUserHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar4, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+        );
+        PanelUserHistoryLayout.setVerticalGroup(
+            PanelUserHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelUserHistoryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToolBar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("User Story", PanelUserHistory);
 
         jMenu1.setText("File");
 
@@ -657,6 +755,58 @@ public class MainMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_membersEditActionPerformed
 
+    private void newStoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newStoryActionPerformed
+        UserStoryForm d1 = new UserStoryForm(this, true);
+        d1.setLocationRelativeTo(this);
+        d1.setVisible(true);
+
+        
+        proyect.stories.add(d1.getHistory());
+        this.reloadHistoryTables();
+    }//GEN-LAST:event_newStoryActionPerformed
+
+    private void deleteStoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStoryActionPerformed
+        if (this.storyTable.getSelectedRow() == -1) {
+            return;
+        }
+
+        this.proyect.stories.remove(this.storyTable.getSelectedRow());
+        this.reloadHistoryTables();
+    }//GEN-LAST:event_deleteStoryActionPerformed
+
+    private void storyEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storyEditActionPerformed
+        if (this.storyTable.getSelectedRow() != -1) {
+            UserStoryForm d1 = new UserStoryForm(this, true);
+            d1.setLocationRelativeTo(this);
+
+            d1.setHistoryName(storyTable.getValueAt(storyTable.getSelectedRow(), 0).toString());
+            d1.setHistoryDescription(storyTable.getValueAt(storyTable.getSelectedRow(), 1).toString());
+            d1.setHistoryCriteria(storyTable.getValueAt(storyTable.getSelectedRow(), 2).toString());
+
+            d1.setVisible(true);
+
+            String updatedName = d1.getHistoryName();
+            String updatedDescription = d1.getHistoryDescription();
+            String updatedCriteria = d1.getHistoryCriteria();
+
+            if (updatedName != null && updatedDescription != null && updatedCriteria != null) {
+                int selectedRow = this.storyTable.getSelectedRow();
+                UserHistory selectedHistory = proyect.stories.get(selectedRow);
+
+                // Actualizar los datos en el objeto UserHistory
+                selectedHistory.setTitle(updatedName);
+                selectedHistory.setDescription(updatedDescription);
+                selectedHistory.setAceptationCriteria(updatedCriteria);
+
+                // Actualizar la tabla a través de la clase proyect
+                proyect.updateStory(selectedRow, updatedName, updatedDescription, updatedCriteria);
+
+                // Volver a cargar la tabla
+                this.reloadHistoryTables();
+            }
+        }
+    }//GEN-LAST:event_storyEditActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -685,12 +835,15 @@ public class MainMenu extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuItemSave;
+    private javax.swing.JPanel PanelUserHistory;
     private javax.swing.JButton addTask;
+    private javax.swing.JButton deleteStory;
     private javax.swing.JButton deletemember;
     private javax.swing.JButton deleteteam;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
@@ -701,26 +854,31 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
+    private javax.swing.JToolBar jToolBar4;
     private javax.swing.JButton membersEdit;
-    public javax.swing.JTable membersTable;
+    private javax.swing.JTable membersTable;
+    private javax.swing.JButton newStory;
     private javax.swing.JButton newmember;
     private javax.swing.JButton newteam;
     private javax.swing.JPanel panelMembers;
     private javax.swing.JPanel panelTask;
     private javax.swing.JPanel panelTeams;
+    private javax.swing.JButton storyEdit;
+    private javax.swing.JTable storyTable;
     private javax.swing.JButton taskEdit;
     private javax.swing.JTable taskTable;
     private javax.swing.JButton teamEdit;
     private javax.swing.JTable teamsTable;
     // End of variables declaration//GEN-END:variables
 
-    private void reloadTeamsTables() {
+    public void reloadTeamsTables() {
         var teamsModel = (DefaultTableModel) this.teamsTable.getModel();
         teamsModel.setRowCount(0);
         for (int i = 0; i < proyect.teams.size(); i++) {
@@ -765,6 +923,19 @@ public class MainMenu extends javax.swing.JFrame {
                     team.getName()
                 });
             }
+        }
+    }
+    public void reloadHistoryTables() {
+
+        var storyModel = (DefaultTableModel) this.storyTable.getModel();
+        storyModel.setRowCount(0);
+        for (int i = 0; i < proyect.stories.size(); i++) {
+            var foo = proyect.stories.get(i);
+            storyModel.addRow(new Object[]{
+                foo.getTitle(),
+                foo.getDescription(),
+                foo.getAceptationCriteria()
+            });
         }
     }
 
