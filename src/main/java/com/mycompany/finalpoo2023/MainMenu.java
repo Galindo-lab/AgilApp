@@ -146,6 +146,7 @@ public class MainMenu extends javax.swing.JFrame {
         taskEdit.setText("Edit");
         taskEdit.setFocusable(false);
         taskEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        taskEdit.setPreferredSize(new java.awt.Dimension(70, 24));
         taskEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         taskEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,6 +242,7 @@ public class MainMenu extends javax.swing.JFrame {
         teamEdit.setText("Edit");
         teamEdit.setFocusable(false);
         teamEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        teamEdit.setPreferredSize(new java.awt.Dimension(70, 24));
         teamEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         teamEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,6 +317,7 @@ public class MainMenu extends javax.swing.JFrame {
         membersEdit.setText("Edit");
         membersEdit.setFocusable(false);
         membersEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        membersEdit.setPreferredSize(new java.awt.Dimension(70, 24));
         membersEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         membersEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,6 +407,7 @@ public class MainMenu extends javax.swing.JFrame {
         storyEdit.setText("Edit");
         storyEdit.setFocusable(false);
         storyEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        storyEdit.setPreferredSize(new java.awt.Dimension(70, 24));
         storyEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         storyEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -594,11 +598,39 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_newteamActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         if (this.taskTable.getSelectedRow() == -1) {
             return;
         }
-
-        //proyect.taskboard.get(this.taskTable.getSelectedRow()).setTeamMember(teamMember);
+        
+        var tms = new TeamMemberSelectorDialog(this,true);
+        tms.setLocationRelativeTo(this);
+        
+        // cargar los nombres de los equipos ----------------------------------
+        for (Team teami : proyect.teams) {
+            tms.addTeam(teami.getName());
+        }
+        
+        
+        // --------------------------------------------------------------------
+        
+        tms.setVisible(true);
+        
+        if (tms.showOpenDialog() != TeamMemberSelectorDialog.APPROVE_OPTION) {
+            return;
+        }
+        
+        System.out.println(tms.getTeam());
+        var foo = proyect.getTeam(tms.getTeam()).getMember(tms.getMemberName());
+        
+        if (foo == null) {
+            JOptionPane.showMessageDialog(this, "Miembro inexistente", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+        proyect.taskboard.get(this.taskTable.getSelectedRow()).setTeamMember(foo);
+        this.reloadTaskTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void deleteteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteteamActionPerformed

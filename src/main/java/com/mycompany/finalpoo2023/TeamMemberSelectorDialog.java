@@ -4,14 +4,25 @@
  */
 package com.mycompany.finalpoo2023;
 
+import com.mycompany.agileutils.TeamMember;
+
 /**
  *
  * @author Eduar
  */
 public class TeamMemberSelectorDialog extends javax.swing.JDialog {
 
+    TeamMember teamMember;
+    private int returnValue = 0;
+    
+    public static final int APPROVE_OPTION = 0;
+    public static final int CANCEL_OPTION = 1;
+
+    
     /**
      * Creates new form TeamMemberSelectorDialog
+     * @param parent
+     * @param modal
      */
     public TeamMemberSelectorDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,19 +39,29 @@ public class TeamMemberSelectorDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        teams = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        teams.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        teams.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teamsActionPerformed(evt);
             }
         });
 
@@ -67,7 +88,7 @@ public class TeamMemberSelectorDialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(jComboBox1, 0, 159, Short.MAX_VALUE))
+                                .addComponent(teams, 0, 159, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField1)))))
@@ -78,7 +99,7 @@ public class TeamMemberSelectorDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(teams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -92,9 +113,26 @@ public class TeamMemberSelectorDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void teamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_teamsActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (this.getMemberName().isBlank()) {
+            return;
+        }
+        
+        if (this.getTeam().isBlank()) {
+            return;
+        }
+        
+        this.returnValue = TeamMemberSelectorDialog.APPROVE_OPTION;
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.returnValue = TeamMemberSelectorDialog.CANCEL_OPTION;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -140,9 +178,30 @@ public class TeamMemberSelectorDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> teams;
     // End of variables declaration//GEN-END:variables
+
+    public void addTeam(String name) {
+        this.teams.addItem(name);
+    }
+    
+    public TeamMember getTeamMember() 
+    {
+        return this.teamMember;
+    }
+    
+    public String getTeam() {
+        return this.teams.getSelectedItem().toString();
+    }
+
+    public String getMemberName() {
+        return this.jTextField1.getText();
+    }
+
+    public int showOpenDialog() {
+        return this.returnValue;
+    }
 }
