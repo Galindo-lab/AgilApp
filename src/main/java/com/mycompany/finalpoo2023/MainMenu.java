@@ -859,9 +859,9 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         MainMenu main = new MainMenu();
 
-        StartDialog sd = new StartDialog(main, true);
-        sd.setLocationRelativeTo(main);
-        sd.setVisible(true);
+        //StartDialog sd = new StartDialog(main, true);
+        //sd.setLocationRelativeTo(main);
+        //sd.setVisible(true);
 
         java.awt.EventQueue.invokeLater(() -> {
             main.setVisible(true);
