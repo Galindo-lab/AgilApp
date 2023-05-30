@@ -38,14 +38,13 @@ public class MainMenu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     Proyect proyect;
-    
 
     public MainMenu() {
         initComponents();
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/icons8-add-48.png")));
 
-        proyect = new Proyect("","");
-        
+        proyect = new Proyect("", "");
+
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
@@ -165,11 +164,11 @@ public class MainMenu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Task", "Duration (Days)", "Start Date", "End Date"
+                "ID", "Task", "Duration (Days)", "Team Member", "Start Date", "End Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -458,10 +457,10 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_newmemberActionPerformed
 
     private void MenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSaveActionPerformed
-         // Crear el selector de archivos
+        // Crear el selector de archivos
         JFileChooser selectorArchivos = new JFileChooser();
         selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-                
+
         selectorArchivos.setFileFilter(new FileNameExtensionFilter("Archivos de MS Project (*.mpx)", "mpx"));
 
         if (selectorArchivos.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
@@ -472,17 +471,17 @@ public class MainMenu extends javax.swing.JFrame {
         // Verificar si la extensión del archivo es .mpp
         File archivoSeleccionado = selectorArchivos.getSelectedFile();
         System.out.println(archivoSeleccionado.getAbsolutePath());
-        
+
         int write = JOptionPane.YES_OPTION;
         if (archivoSeleccionado.exists()) {
             write = JOptionPane.showConfirmDialog(this, "Overwrite file?", "Overwrite", JOptionPane.YES_NO_OPTION);
         }
-        
+
         if (write == JOptionPane.YES_OPTION) {
             proyect.export(archivoSeleccionado.getAbsolutePath());
             System.out.println(proyect.getFile().getPath());
         }
-        
+
         //aaa
     }//GEN-LAST:event_MenuItemSaveActionPerformed
 
@@ -497,7 +496,11 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_newteamActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if (this.taskTable.getSelectedRow() == -1) {
+            return;
+        }
+
+        //proyect.taskboard.get(this.taskTable.getSelectedRow()).setTeamMember(teamMember);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void deleteteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteteamActionPerformed
@@ -559,7 +562,7 @@ public class MainMenu extends javax.swing.JFrame {
         if (selectedRow != -1) {
             TaskDialog td = new TaskDialog(this, true);
             td.setLocationRelativeTo(this);
-            
+
             String taskName = taskTable.getValueAt(selectedRow, 1).toString();
             td.setTaskName(taskName);
             int taskID = (int) taskTable.getValueAt(selectedRow, 0);
@@ -584,7 +587,7 @@ public class MainMenu extends javax.swing.JFrame {
             // Actualizar los valores de la tabla con los valores editados
             Task editedTask = td.getTask();
             proyect.taskboard.updateTask(editedTask);
-            
+
             this.reloadTaskTable();
         }
     }//GEN-LAST:event_taskEditActionPerformed
@@ -593,23 +596,23 @@ public class MainMenu extends javax.swing.JFrame {
         if (this.teamsTable.getSelectedRow() != -1) {
             TeamForm d1 = new TeamForm(this, true);
             d1.setLocationRelativeTo(this);
-            
+
             d1.setName(teamsTable.getValueAt(teamsTable.getSelectedRow(), 0).toString());
             d1.setScrummaster(teamsTable.getValueAt(teamsTable.getSelectedRow(), 1).toString());
-            
+
             d1.setVisible(true);
-            
+
             String updatedName = d1.getTeamName();
             String updatedScrumMaster = d1.getScrumMaster();
             int teamIndex = this.teamsTable.getSelectedRow();
-            
+
             Team team = proyect.teams.get(teamIndex);
             team.setName(updatedName);
             //team.setScrumMaster(updatedScrumMaster);
-            
+
             this.reloadTeamsTables();
             this.reloadMembersTables();
-            
+
         }
     }//GEN-LAST:event_teamEditActionPerformed
 
@@ -624,15 +627,14 @@ public class MainMenu extends javax.swing.JFrame {
             String name = membersTable.getValueAt(selectedRow, 1).toString();
             String email = membersTable.getValueAt(selectedRow, 2).toString();
             String team = membersTable.getValueAt(selectedRow, 3).toString();
-            
+
             for (Team teami : proyect.teams) {
-            memberForm.addTeam(teami.getName());
+                memberForm.addTeam(teami.getName());
             }
             // Pasar los valores al formulario de edición
             memberForm.setID(id);
             memberForm.setName(name);
             memberForm.setEmail(email);
-            
 
             memberForm.setVisible(true);
             if (memberForm.isValueCaptured()) {
@@ -735,12 +737,20 @@ public class MainMenu extends javax.swing.JFrame {
     public void reloadTaskTable() {
         var taskModel = (DefaultTableModel) this.taskTable.getModel();
         taskModel.setRowCount(0);
+
         for (int i = 0; i < proyect.taskboard.size(); i++) {
             var foo = proyect.taskboard.get(i);
+
+            String teamMemberName = "";
+            if (foo.getTeamMember() != null) {
+                teamMemberName = foo.getTeamMember().getName();
+            }
+
             taskModel.addRow(new Object[]{
                 foo.getId(),
                 foo.getName(),
                 foo.getDurationDays(),
+                teamMemberName,
                 foo.getStart(),
                 foo.getEnd()
             });
