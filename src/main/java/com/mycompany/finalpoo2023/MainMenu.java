@@ -698,12 +698,12 @@ public class MainMenu extends javax.swing.JFrame {
             int taskID = (int) taskTable.getValueAt(selectedRow, 0);
             td.setTaskID(taskID);
 
-            Date startDate = (Date) taskTable.getValueAt(selectedRow, 3);
+            Date startDate = (Date) taskTable.getValueAt(selectedRow, 4);
             Instant startInstant = startDate.toInstant();
             LocalDate startDateLocal = startInstant.atZone(ZoneId.systemDefault()).toLocalDate();
             td.setStartDate(startDateLocal);
 
-            Date endDate = (Date) taskTable.getValueAt(selectedRow, 4);
+            Date endDate = (Date) taskTable.getValueAt(selectedRow, 5);
             Instant endInstant = endDate.toInstant();
             LocalDate endDateLocal = endInstant.atZone(ZoneId.systemDefault()).toLocalDate();
             td.setEndDate(endDateLocal);
@@ -767,24 +767,17 @@ public class MainMenu extends javax.swing.JFrame {
             memberForm.setEmail(email);
 
             memberForm.setVisible(true);
-            if (memberForm.isValueCaptured()) {
-                String updatedName = memberForm.getName();
-                String updatedID = memberForm.getID();
-                String updatedEmail = memberForm.getEmail();
-                String updatedTeam = memberForm.getTeams();
+            
+            this.proyect.getTeam(memberForm.getTeam()).addMember(memberForm.getMember());
+            var row = this.membersTable.getSelectedRow();
+            var t = (String) this.membersTable.getModel().getValueAt(row, 3);
+            var n = (String) this.membersTable.getModel().getValueAt(row, 1);
 
-                // Obtener el equipo correspondiente en tu sistema
-                Team teamObject = proyect.getTeam(updatedTeam);
-                if (teamObject != null) {
-                    // Actualizar el miembro correspondiente en el equipo
-                    teamObject.updateMember(updatedID, updatedName, updatedEmail);
+            proyect.getTeam(t).removeMember(n);
 
-                    // Vuelve a cargar los miembros en la tabla
-                    this.reloadMembersTables();
-                } else {
-                    System.out.println("El equipo no existe");
-                }
-            }
+            this.reloadMembersTables();
+            this.reloadTaskTable();
+            
         }
 
     }//GEN-LAST:event_membersEditActionPerformed
