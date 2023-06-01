@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import net.sf.mpxj.ProjectFile;
 import net.sf.mpxj.Task;
+import net.sf.mpxj.TaskContainer;
 import net.sf.mpxj.mpx.MPXWriter;
 import net.sf.mpxj.writer.ProjectWriter;
 
@@ -63,6 +64,11 @@ public class ProyectFileExporter {
             }
         }
     }
+    
+    private void exportUserHistories()
+    {
+        
+    }
 
     /**
      * Escribe el archivo MPX
@@ -70,6 +76,7 @@ public class ProyectFileExporter {
      * @throws IOException
      */
     public void write() throws IOException {
+        
         this.exportTaskboard();
         this.exportTeams();
         this.exportAssignations();
@@ -83,4 +90,16 @@ public class ProyectFileExporter {
 
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ProyectFileExporter{");
+        sb.append("projectFile=").append(projectFile);
+        sb.append(", project=").append(project);
+        sb.append('}');
+        return sb.toString();
+    }
+    
+    
+    
 }

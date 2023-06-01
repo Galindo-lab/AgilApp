@@ -96,6 +96,8 @@ public class MainMenu extends javax.swing.JFrame {
         newStory = new javax.swing.JButton();
         deleteStory = new javax.swing.JButton();
         storyEdit = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jButton3 = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane5 = new javax.swing.JScrollPane();
         storyTable = new javax.swing.JTable();
@@ -415,6 +417,19 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jToolBar4.add(storyEdit);
+        jToolBar4.add(jSeparator3);
+
+        jButton3.setText("Asign");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setPreferredSize(new java.awt.Dimension(70, 24));
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(jButton3);
         jToolBar4.add(filler4);
 
         storyTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -532,7 +547,7 @@ public class MainMenu extends javax.swing.JFrame {
         this.reloadTaskTable();
         this.reloadTeamsTables();
         this.reloadMembersTables();
-
+        this.reloadHistoryTables();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jToolBar1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jToolBar1ComponentAdded
@@ -602,33 +617,30 @@ public class MainMenu extends javax.swing.JFrame {
         if (this.taskTable.getSelectedRow() == -1) {
             return;
         }
-        
-        var tms = new TeamMemberSelectorDialog(this,true);
+
+        var tms = new TeamMemberSelectorDialog(this, true);
         tms.setLocationRelativeTo(this);
-        
+
         // cargar los nombres de los equipos ----------------------------------
         for (Team teami : proyect.teams) {
             tms.addTeam(teami.getName());
         }
-        
-        
+
         // --------------------------------------------------------------------
-        
         tms.setVisible(true);
-        
+
         if (tms.showOpenDialog() != TeamMemberSelectorDialog.APPROVE_OPTION) {
             return;
         }
-        
+
         System.out.println(tms.getTeam());
         var foo = proyect.getTeam(tms.getTeam()).getMember(tms.getMemberName());
-        
+
         if (foo == null) {
             JOptionPane.showMessageDialog(this, "Miembro inexistente", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        
+
         proyect.taskboard.get(this.taskTable.getSelectedRow()).setTeamMember(foo);
         this.reloadTaskTable();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -767,7 +779,7 @@ public class MainMenu extends javax.swing.JFrame {
             memberForm.setEmail(email);
 
             memberForm.setVisible(true);
-            
+
             this.proyect.getTeam(memberForm.getTeam()).addMember(memberForm.getMember());
             var row = this.membersTable.getSelectedRow();
             var t = (String) this.membersTable.getModel().getValueAt(row, 3);
@@ -777,7 +789,7 @@ public class MainMenu extends javax.swing.JFrame {
 
             this.reloadMembersTables();
             this.reloadTaskTable();
-            
+
         }
 
     }//GEN-LAST:event_membersEditActionPerformed
@@ -787,7 +799,6 @@ public class MainMenu extends javax.swing.JFrame {
         d1.setLocationRelativeTo(this);
         d1.setVisible(true);
 
-        
         proyect.stories.add(d1.getHistory());
         this.reloadHistoryTables();
     }//GEN-LAST:event_newStoryActionPerformed
@@ -834,6 +845,29 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_storyEditActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        TaskSelector ts = new TaskSelector(this, true);
+        ts.loadTasks(proyect.taskboard);
+        ts.setVisible(true);
+
+        if (ts.getSelected() == -1) {
+            return;
+        }
+
+        if (storyTable.getSelectedRow() == -1) {
+            return;
+        }
+
+        var task = proyect.taskboard.get(ts.getSelected());
+        var history = proyect.stories.get(storyTable.getSelectedRow());
+
+        task.setDescription(
+                history.getTitle() + ";" + 
+                history.getDescription() + ";" +
+                history.getAceptationCriteria()
+        );
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -855,7 +889,6 @@ public class MainMenu extends javax.swing.JFrame {
         //StartDialog sd = new StartDialog(main, true);
         //sd.setLocationRelativeTo(main);
         //sd.setVisible(true);
-
         java.awt.EventQueue.invokeLater(() -> {
             main.setVisible(true);
         });
@@ -873,6 +906,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -884,6 +918,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
@@ -960,6 +995,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         }
     }
+
     public void reloadHistoryTables() {
 
         var storyModel = (DefaultTableModel) this.storyTable.getModel();

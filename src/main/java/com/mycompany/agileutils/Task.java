@@ -73,18 +73,17 @@ public class Task {
 
         Duration foo = Duration.getInstance(this.getDurationDays(), net.sf.mpxj.TimeUnit.DAYS);
         task.setDuration(foo);
+        task.setNotes(description);
     }
     
     public static Task importTask(net.sf.mpxj.Task task) {
         Task mis = new Task();
         mis.name = task.getName();
         mis.start = task.getStart();
-        mis.id = task.getID();
-        
+        mis.id = task.getID();        
         mis.end = new Date();
-        
         mis.end.setTime((long) (task.getStart().getTime() + task.getDuration().getDuration() * 86400000));
-        
+        mis.description = task.getNotes();
         
         return mis;
     }

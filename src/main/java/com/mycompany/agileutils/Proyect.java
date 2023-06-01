@@ -68,9 +68,12 @@ public class Proyect {
         int teamIndex = -1;
 
         for (var i = 0; i < this.teams.size(); i++) {
-            String teamName = this.teams.get(i).getName();
-
-            if (teamName.equals(name)) {
+            
+            if (this.teams.get(i).getName() == null) {
+                continue;
+            }
+            
+            if (this.teams.get(i).getName().equals(name)) {
                 teamIndex = i;
                 break;
             }
