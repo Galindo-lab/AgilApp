@@ -14,6 +14,7 @@ import net.sf.mpxj.Task;
 import net.sf.mpxj.TaskContainer;
 import net.sf.mpxj.mpx.MPXWriter;
 import net.sf.mpxj.writer.ProjectWriter;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * Clase para exportar el proyect a un archivo MPXJ
@@ -85,7 +86,11 @@ public class ProyectFileExporter {
 
         //File a = project.getPath().toFile();
         File a = project.getFile().getPath().toFile();
-
+        
+        if (FilenameUtils.getExtension(a.toString()).equals("")) {
+            a = new File(a.toString() + ".mpx");
+        }
+        
         writer.write(projectFile, a);
 
     }
