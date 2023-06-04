@@ -11,7 +11,6 @@ public class TeamMember {
     private String name;
     private String email;
     private int id;
-    private String team;
 
     /**
      * @param email
@@ -36,6 +35,7 @@ public class TeamMember {
     void export(Resource resource) {
         resource.setName(this.name);
         resource.setID(this.id);
+        resource.setEmailAddress(email);
     }
 
     public String getName() {
@@ -57,9 +57,6 @@ public class TeamMember {
         return email;
     }
 
-    public void setTeam(String team) {
-        this.team = team;
-    }
 
     public int getId() {
         return id;

@@ -33,7 +33,10 @@ public class ProyectFileImporter {
                 team = this.project.createTeam(teamName);
             }
             
-            team.addMember(new TeamMember(resource.getName(), resource.getEmailAddress()));
+            TeamMember tm = new TeamMember(resource.getName(), resource.getEmailAddress());
+            tm.setId(resource.getID());
+            
+            team.addMember(tm);
         }
         
     }

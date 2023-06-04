@@ -75,11 +75,23 @@ public class MainMenu extends javax.swing.JFrame {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane1 = new javax.swing.JScrollPane();
         taskTable = new javax.swing.JTable();
+        PanelUserHistory = new javax.swing.JPanel();
+        jToolBar4 = new javax.swing.JToolBar();
+        newStory = new javax.swing.JButton();
+        deleteStory = new javax.swing.JButton();
+        storyEdit = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jButton3 = new javax.swing.JButton();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jScrollPane5 = new javax.swing.JScrollPane();
+        storyTable = new javax.swing.JTable();
         panelTeams = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         newteam = new javax.swing.JButton();
         deleteteam = new javax.swing.JButton();
         teamEdit = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        assign = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane3 = new javax.swing.JScrollPane();
         teamsTable = new javax.swing.JTable();
@@ -91,16 +103,6 @@ public class MainMenu extends javax.swing.JFrame {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jScrollPane4 = new javax.swing.JScrollPane();
         membersTable = new javax.swing.JTable();
-        PanelUserHistory = new javax.swing.JPanel();
-        jToolBar4 = new javax.swing.JToolBar();
-        newStory = new javax.swing.JButton();
-        deleteStory = new javax.swing.JButton();
-        storyEdit = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
-        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jScrollPane5 = new javax.swing.JScrollPane();
-        storyTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -110,6 +112,9 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("mySCRUM");
         setIconImage(getIconImage());
+
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jToolBar1.setRollover(true);
         jToolBar1.setFloatable(false);
@@ -209,6 +214,106 @@ public class MainMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Tasks", panelTask);
 
+        jToolBar4.setRollover(true);
+        jToolBar4.setBorderPainted(false);
+        jToolBar4.setMaximumSize(new java.awt.Dimension(133, 28));
+        jToolBar4.setMinimumSize(new java.awt.Dimension(133, 28));
+        jToolBar4.setPreferredSize(new java.awt.Dimension(133, 28));
+
+        newStory.setText("New");
+        newStory.setFocusable(false);
+        newStory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newStory.setPreferredSize(new java.awt.Dimension(70, 24));
+        newStory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        newStory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newStoryActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(newStory);
+
+        deleteStory.setText("Delete");
+        deleteStory.setFocusable(false);
+        deleteStory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteStory.setPreferredSize(new java.awt.Dimension(70, 24));
+        deleteStory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        deleteStory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteStoryActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(deleteStory);
+
+        storyEdit.setText("Edit");
+        storyEdit.setFocusable(false);
+        storyEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        storyEdit.setPreferredSize(new java.awt.Dimension(70, 24));
+        storyEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        storyEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storyEditActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(storyEdit);
+        jToolBar4.add(jSeparator3);
+
+        jButton3.setText("Assign");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setPreferredSize(new java.awt.Dimension(70, 24));
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(jButton3);
+        jToolBar4.add(filler4);
+
+        storyTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Description", "Aceptation Criteria"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        storyTable.setFocusable(false);
+        jScrollPane5.setViewportView(storyTable);
+
+        javax.swing.GroupLayout PanelUserHistoryLayout = new javax.swing.GroupLayout(PanelUserHistory);
+        PanelUserHistory.setLayout(PanelUserHistoryLayout);
+        PanelUserHistoryLayout.setHorizontalGroup(
+            PanelUserHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar4, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+        );
+        PanelUserHistoryLayout.setVerticalGroup(
+            PanelUserHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelUserHistoryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToolBar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("User Story", PanelUserHistory);
+
         jToolBar2.setRollover(true);
         jToolBar2.setFloatable(false);
         jToolBar2.setBorderPainted(false);
@@ -252,6 +357,19 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(teamEdit);
+        jToolBar2.add(jSeparator4);
+
+        assign.setText("Assign");
+        assign.setFocusable(false);
+        assign.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        assign.setPreferredSize(new java.awt.Dimension(70, 24));
+        assign.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        assign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(assign);
         jToolBar2.add(filler2);
 
         teamsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -375,106 +493,6 @@ public class MainMenu extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Members", panelMembers);
-
-        jToolBar4.setRollover(true);
-        jToolBar4.setBorderPainted(false);
-        jToolBar4.setMaximumSize(new java.awt.Dimension(133, 28));
-        jToolBar4.setMinimumSize(new java.awt.Dimension(133, 28));
-        jToolBar4.setPreferredSize(new java.awt.Dimension(133, 28));
-
-        newStory.setText("New");
-        newStory.setFocusable(false);
-        newStory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        newStory.setPreferredSize(new java.awt.Dimension(70, 24));
-        newStory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        newStory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newStoryActionPerformed(evt);
-            }
-        });
-        jToolBar4.add(newStory);
-
-        deleteStory.setText("Delete");
-        deleteStory.setFocusable(false);
-        deleteStory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        deleteStory.setPreferredSize(new java.awt.Dimension(70, 24));
-        deleteStory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        deleteStory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteStoryActionPerformed(evt);
-            }
-        });
-        jToolBar4.add(deleteStory);
-
-        storyEdit.setText("Edit");
-        storyEdit.setFocusable(false);
-        storyEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        storyEdit.setPreferredSize(new java.awt.Dimension(70, 24));
-        storyEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        storyEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                storyEditActionPerformed(evt);
-            }
-        });
-        jToolBar4.add(storyEdit);
-        jToolBar4.add(jSeparator3);
-
-        jButton3.setText("Asign");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setPreferredSize(new java.awt.Dimension(70, 24));
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jToolBar4.add(jButton3);
-        jToolBar4.add(filler4);
-
-        storyTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Name", "Description", "Aceptation Criteria"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        storyTable.setFocusable(false);
-        jScrollPane5.setViewportView(storyTable);
-
-        javax.swing.GroupLayout PanelUserHistoryLayout = new javax.swing.GroupLayout(PanelUserHistory);
-        PanelUserHistory.setLayout(PanelUserHistoryLayout);
-        PanelUserHistoryLayout.setHorizontalGroup(
-            PanelUserHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar4, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
-        );
-        PanelUserHistoryLayout.setVerticalGroup(
-            PanelUserHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelUserHistoryLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jToolBar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("User Story", PanelUserHistory);
 
         jMenu1.setText("File");
 
@@ -620,28 +638,22 @@ public class MainMenu extends javax.swing.JFrame {
 
         var tms = new TeamMemberSelectorDialog(this, true);
         tms.setLocationRelativeTo(this);
-
-        // cargar los nombres de los equipos ----------------------------------
-        for (Team teami : proyect.teams) {
-            tms.addTeam(teami.getName());
-        }
-
-        // --------------------------------------------------------------------
+        tms.loadTeams(proyect.teams);
         tms.setVisible(true);
 
+        // --------------------------------------------------------------------
         if (tms.showOpenDialog() != TeamMemberSelectorDialog.APPROVE_OPTION) {
             return;
         }
 
-        System.out.println(tms.getTeam());
-        var foo = proyect.getTeam(tms.getTeam()).getMember(tms.getMemberName());
+        var selectedTeam = proyect.getTeam(tms.getTeam());
+        var selectedMember = selectedTeam.getMember(tms.getMemberName());
 
-        if (foo == null) {
-            JOptionPane.showMessageDialog(this, "Miembro inexistente", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        proyect.taskboard.get(this.taskTable.getSelectedRow()).setTeamMember(foo);
+//        if (selectedMember == null) {
+//            JOptionPane.showMessageDialog(this, "Miembro inexistente", "Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+        proyect.taskboard.get(taskTable.getSelectedRow()).setTeamMember(selectedMember);
         this.reloadTaskTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -740,12 +752,12 @@ public class MainMenu extends javax.swing.JFrame {
             d1.setLocationRelativeTo(this);
 
             d1.setName(teamsTable.getValueAt(teamsTable.getSelectedRow(), 0).toString());
-            d1.setScrummaster(teamsTable.getValueAt(teamsTable.getSelectedRow(), 1).toString());
+            //d1.setScrummaster(teamsTable.getValueAt(teamsTable.getSelectedRow(), 1).toString());
 
             d1.setVisible(true);
 
             String updatedName = d1.getTeamName();
-            String updatedScrumMaster = d1.getScrumMaster();
+            //String updatedScrumMaster = d1.getScrumMaster();
             int teamIndex = this.teamsTable.getSelectedRow();
 
             Team team = proyect.teams.get(teamIndex);
@@ -760,37 +772,42 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void membersEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_membersEditActionPerformed
         if (membersTable.getSelectedRow() != -1) {
-            MemberForm memberForm = new MemberForm(this, true);
-            memberForm.setLocationRelativeTo(this);
-
-            // Obtener los valores de la fila seleccionada en la tabla
-            int selectedRow = membersTable.getSelectedRow();
-            String id = membersTable.getValueAt(selectedRow, 0).toString();
-            String name = membersTable.getValueAt(selectedRow, 1).toString();
-            String email = membersTable.getValueAt(selectedRow, 2).toString();
-            String team = membersTable.getValueAt(selectedRow, 3).toString();
-
-            for (Team teami : proyect.teams) {
-                memberForm.addTeam(teami.getName());
-            }
-            // Pasar los valores al formulario de edición
-            memberForm.setID(id);
-            memberForm.setName(name);
-            memberForm.setEmail(email);
-
-            memberForm.setVisible(true);
-
-            this.proyect.getTeam(memberForm.getTeam()).addMember(memberForm.getMember());
-            var row = this.membersTable.getSelectedRow();
-            var t = (String) this.membersTable.getModel().getValueAt(row, 3);
-            var n = (String) this.membersTable.getModel().getValueAt(row, 1);
-
-            proyect.getTeam(t).removeMember(n);
-
-            this.reloadMembersTables();
-            this.reloadTaskTable();
-
+            return;
         }
+
+        MemberForm memberForm = new MemberForm(this, true);
+        
+        
+        
+        memberForm.setLocationRelativeTo(this);
+
+        // Obtener los valores de la fila seleccionada en la tabla
+        int selectedRow = membersTable.getSelectedRow();
+        String id = membersTable.getValueAt(selectedRow, 0).toString();
+        String name = membersTable.getValueAt(selectedRow, 1).toString();
+        String email = membersTable.getValueAt(selectedRow, 2).toString();
+        String team = membersTable.getValueAt(selectedRow, 3).toString();
+
+        for (Team teami : proyect.teams) {
+            memberForm.addTeam(teami.getName());
+        }
+        
+        // Pasar los valores al formulario de edición
+        memberForm.setID(id);
+        memberForm.setName(name);
+        memberForm.setEmail(email);
+
+        memberForm.setVisible(true);
+
+        this.proyect.getTeam(memberForm.getTeam()).addMember(memberForm.getMember());
+        var row = this.membersTable.getSelectedRow();
+        var t = (String) this.membersTable.getModel().getValueAt(row, 3);
+        var n = (String) this.membersTable.getModel().getValueAt(row, 1);
+
+        proyect.getTeam(t).removeMember(n);
+
+        this.reloadMembersTables();
+        this.reloadTaskTable();
 
     }//GEN-LAST:event_membersEditActionPerformed
 
@@ -862,11 +879,23 @@ public class MainMenu extends javax.swing.JFrame {
         var history = proyect.stories.get(storyTable.getSelectedRow());
 
         task.setDescription(
-                history.getTitle() + ";" + 
-                history.getDescription() + ";" +
-                history.getAceptationCriteria()
+                history.getTitle() + ";"
+                + history.getDescription() + ";"
+                + history.getAceptationCriteria()
         );
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void assignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignActionPerformed
+        var tmsd = new TeamMemberSelectorDialog(this, true);
+
+        tmsd.loadTeams(proyect.teams);
+        
+        
+        tmsd.setLocationRelativeTo(this);
+        tmsd.setVisible(true);
+        
+
+    }//GEN-LAST:event_assignActionPerformed
 
     /**
      * @param args the command line arguments
@@ -897,6 +926,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemSave;
     private javax.swing.JPanel PanelUserHistory;
     private javax.swing.JButton addTask;
+    private javax.swing.JButton assign;
     private javax.swing.JButton deleteStory;
     private javax.swing.JButton deletemember;
     private javax.swing.JButton deleteteam;
@@ -919,6 +949,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
@@ -957,7 +988,9 @@ public class MainMenu extends javax.swing.JFrame {
         taskModel.setRowCount(0);
 
         for (int i = 0; i < proyect.taskboard.size(); i++) {
+
             var foo = proyect.taskboard.get(i);
+            System.out.println(foo);
 
             String teamMemberName = "";
             if (foo.getTeamMember() != null) {

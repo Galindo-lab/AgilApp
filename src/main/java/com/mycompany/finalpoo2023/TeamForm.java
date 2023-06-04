@@ -34,8 +34,6 @@ public class TeamForm extends javax.swing.JDialog {
 
         jLabel2 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        scrummaster = new javax.swing.JTextField();
         guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -49,8 +47,6 @@ public class TeamForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("ScrumMaster");
-
         guardar.setText("Save");
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,17 +59,13 @@ public class TeamForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(guardar)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(name)
-                            .addComponent(scrummaster, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -83,13 +75,9 @@ public class TeamForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(scrummaster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(guardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -102,13 +90,7 @@ public class TeamForm extends javax.swing.JDialog {
     public String getTaskName() {
         return name.getText();
     }
-    public void setScrummaster(String scrum) {
-        this.scrummaster.setText(scrum);
-    }
     
-    public String getScrummaster() {
-        return scrummaster.getText();
-    }
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         
         JOptionPane optionPane = new JOptionPane("Incomplete data", JOptionPane.ERROR_MESSAGE);
@@ -120,11 +102,6 @@ public class TeamForm extends javax.swing.JDialog {
             return;
         }
         
-        if (this.scrummaster.getText().isEmpty()) {
-            dialog.setVisible(true);
-            return;
-        }
-       
         dispose();
     }//GEN-LAST:event_guardarActionPerformed
 
@@ -178,17 +155,11 @@ public class TeamForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField name;
-    private javax.swing.JTextField scrummaster;
     // End of variables declaration//GEN-END:variables
 
     public String getTeamName() {
         return this.name.getText();
-    }
-
-    public String getScrumMaster() {
-        return this.scrummaster.getName();
     }
     
     public Team getTeam() {

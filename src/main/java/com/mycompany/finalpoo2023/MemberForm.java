@@ -48,7 +48,7 @@ public class MemberForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("New Member");
 
-        lblnombre.setText("Nombre");
+        lblnombre.setText("Name");
 
         jLabel2.setText("email");
 
@@ -58,7 +58,7 @@ public class MemberForm extends javax.swing.JDialog {
             }
         });
 
-        guardar.setText("Guardar");
+        guardar.setText("Accept");
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarActionPerformed(evt);
@@ -275,6 +275,7 @@ public class MemberForm extends javax.swing.JDialog {
      */
     public TeamMember getMember() {
         var foo = new TeamMember(name.getText(), email.getText());
+        foo.setId(Integer.parseInt(this.id.getText()));
 
         if (!this.id.getText().isEmpty()) {
             foo.setId(Integer.parseInt(this.id.getText()));
