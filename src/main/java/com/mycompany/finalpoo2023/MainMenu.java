@@ -294,6 +294,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         storyTable.setFocusable(false);
+        storyTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(storyTable);
 
         javax.swing.GroupLayout PanelUserHistoryLayout = new javax.swing.GroupLayout(PanelUserHistory);
@@ -379,7 +380,15 @@ public class MainMenu extends javax.swing.JFrame {
             new String [] {
                 "Name Team", "ScrumMaster"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         teamsTable.setFocusable(false);
         teamsTable.setRequestFocusEnabled(false);
         teamsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -886,15 +895,23 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void assignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignActionPerformed
-        var tmsd = new TeamMemberSelectorDialog(this, true);
-
-        tmsd.loadTeams(proyect.teams);
+        if (teamsTable.getSelectedRow() == -1) {
+            return;
+        }
         
+        MemberSelector ms = new MemberSelector(this, true);
+        var teamName = teamsTable.getValueAt(teamsTable.getSelectedRow(), 0).toString();
+        Team team = proyect.getTeam(teamName);
         
-        tmsd.setLocationRelativeTo(this);
-        tmsd.setVisible(true);
+        ms.loadMembers(team);
+        ms.setVisible(true);
         
-
+        if (ms.getReturnValue() != MemberSelector.APPROVE_OPTION) {
+            return;
+        }
+        
+        team.setScrumMaster(ms.getMemberName());
+        this.reloadTeamsTables();
     }//GEN-LAST:event_assignActionPerformed
 
     /**
@@ -978,7 +995,7 @@ public class MainMenu extends javax.swing.JFrame {
             var foo = proyect.teams.get(i);
             teamsModel.addRow(new Object[]{
                 foo.getName(),
-                "SCRUM MASTER"
+                foo.getScrumMaster()
             });
         }
     }

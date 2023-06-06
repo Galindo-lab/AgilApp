@@ -8,6 +8,7 @@ public class Team {
 
     private String name;
     Vector<TeamMember> members = new Vector<>();
+    private String scrumMaster;
 
     public Team(String name) {
         this.name = name;
@@ -116,5 +117,15 @@ public class Team {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getScrumMaster() {
+        return scrumMaster;
+    }
+
+    public void setScrumMaster(String scrumMaster) {
+        this.scrumMaster = scrumMaster;
+    }
+    
+    
 
 }
