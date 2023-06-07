@@ -7,35 +7,40 @@ import net.sf.mpxj.ResourceAssignment;
 public class TeamMember {
 
     private static int id_key = 0;
-    
+
+    private int id;
     private String name;
     private String email;
-    private int id;
+    private String details;
 
     /**
      * @param email
-     * @deprecated 
-     * @param ID
-     * @param name 
+     * @deprecated
+     * @param name
      */
     @Deprecated
     public TeamMember(String name, String email) {
         this.name = name;
         this.email = email;
         this.id = 0;
+        this.details = "";
     }
-//    
-//    public TeamMember(String name) {
-//        this.name = name;
-//        this.id = id_key;
-//        
-//        id_key++;
-//    }
 
     void export(Resource resource) {
-        resource.setName(this.name);
-        resource.setID(this.id);
+
+        resource.setName(name);
+
+        resource.setID(id);
         resource.setEmailAddress(email);
+        resource.setDescription(details);
+    }
+
+    public void setScrumMaster(boolean state) {
+        this.details = state ? "Scrum Master" : "";
+    }
+
+    public boolean isScrumMaster() {
+        return this.details.equals("Scrum Master");
     }
 
     public String getName() {
@@ -53,10 +58,18 @@ public class TeamMember {
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getTeam() {
         return email;
     }
 
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
 
     public int getId() {
         return id;
@@ -73,6 +86,7 @@ public class TeamMember {
         sb.append("name=").append(name);
         sb.append(", email=").append(email);
         sb.append(", id=").append(id);
+        sb.append(", details=").append(details);
         sb.append('}');
         return sb.toString();
     }

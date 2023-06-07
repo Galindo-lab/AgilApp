@@ -34,9 +34,18 @@ public class ProyectFileImporter {
             }
             
             TeamMember tm = new TeamMember(resource.getName(), resource.getEmailAddress());
-            tm.setId(resource.getID());
             
+            tm.setId(resource.getID());
             team.addMember(tm);
+            
+            if (resource.getDescription() == null) {
+                continue;
+            }
+            
+            System.out.println(resource.getDescription());
+            if (resource.getDescription().contains("Scrum Master")) {
+                team.setScrumMaster(teamName);
+            }
         }
         
     }

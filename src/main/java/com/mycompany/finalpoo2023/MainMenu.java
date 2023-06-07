@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -378,17 +379,18 @@ public class MainMenu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name Team", "ScrumMaster"
+                "Name Team"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        teamsTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         teamsTable.setFocusable(false);
         teamsTable.setRequestFocusEnabled(false);
         teamsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -780,7 +782,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_teamEditActionPerformed
 
     private void membersEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_membersEditActionPerformed
-        if (membersTable.getSelectedRow() != -1) {
+        if (membersTable.getSelectedRow() == -1) {
             return;
         }
 
@@ -895,7 +897,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void assignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignActionPerformed
-        if (teamsTable.getSelectedRow() == -1) {
+        if (teamsTable.getSelectedRow() == JTable.UNDEFINED_CONDITION) {
             return;
         }
         
@@ -910,6 +912,12 @@ public class MainMenu extends javax.swing.JFrame {
             return;
         }
         
+        // reinicia los detalles
+        for (int i = 0; i < team.size(); i++) {
+            team.getMemberByIndex(i).setScrumMaster(false);
+        }
+        
+        team.getMember(ms.getMemberName()).setScrumMaster(true);
         team.setScrumMaster(ms.getMemberName());
         this.reloadTeamsTables();
     }//GEN-LAST:event_assignActionPerformed

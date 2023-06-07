@@ -18,15 +18,17 @@ public class Task {
     static final int IN_PROGRESS = 1;
     static final int DONE = 2;
     
-    private Date start;
-    private Date end;
-    
-    private String name;
-    private String description;
     private int id;
     private int status;
-    public Vector<UserHistory> stories = new Vector<>();
+    
+    private Date start;
+    private Date end;
+    private String name;
+    private String description;
     private TeamMember teamMember;
+    
+    public Vector<UserHistory> stories = new Vector<>();
+    
 
     /**
      *
