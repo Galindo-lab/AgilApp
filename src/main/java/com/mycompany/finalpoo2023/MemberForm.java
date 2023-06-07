@@ -189,6 +189,7 @@ public class MemberForm extends javax.swing.JDialog {
         }
 
         if (this.id.getText().isEmpty()) {
+            dialog.setVisible(true);
             return;
         }
 
