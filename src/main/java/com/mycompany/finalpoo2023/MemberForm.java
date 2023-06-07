@@ -187,7 +187,11 @@ public class MemberForm extends javax.swing.JDialog {
             dialog.setVisible(true);
             return;
         }
-        
+
+        if (this.id.getText().isEmpty()) {
+            return;
+        }
+
         this.valueCaptured = true;
 
         dispose();
