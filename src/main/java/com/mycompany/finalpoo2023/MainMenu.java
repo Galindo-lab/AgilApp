@@ -964,7 +964,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         Desktop desktop = Desktop.getDesktop();
             try {
-                URI uri = new URI("https://drive.google.com/file/d/1ehOx-XlMTbqw12qV-Bn-22XY5GyqUaDp/view");
+                URI uri = new URI("https://drive.google.com/file/d/1TPCJuFHpDURgpuT2UCZl37t0xZcJBk95/view?usp=sharing");
                 desktop.browse(uri);
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
